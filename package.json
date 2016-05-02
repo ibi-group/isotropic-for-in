@@ -9,6 +9,7 @@
         ],
         "sourceMaps": "inline"
     },
+    "bugs": "https://github.com/ibi-group/isotropic-for-in/issues",
     "contributors": [
         "Duane Sibilly <duane.sibilly@ibigroup.com>"
     ],
@@ -43,9 +44,11 @@
         },
         "root": true
     },
+    "homepage": "https://github.com/ibi-group/isotropic-for-in",
     "license": "BSD-3-Clause",
     "main": "lib/for-in.js",
     "name": "isotropic-for-in",
+    "repository": "ibi-group/isotropic-for-in",
     "scripts": {
         "build": "babel js -d lib",
         "lint": "eslint js test",
