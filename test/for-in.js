@@ -1,16 +1,9 @@
-import {
-    describe,
-    it
-} from 'mocha';
-
-import {
-    expect
-} from 'chai';
-
+import chai from 'chai';
 import forIn from '../js/for-in.js';
+import mocha from 'mocha';
 
-describe('for-in', () => {
-    it('should iterate the enumerable properties of an object', () => {
+mocha.describe('for-in', () => {
+    mocha.it('should iterate the enumerable properties of an object', () => {
         let functionExecuted;
 
         const testObject = {
@@ -18,16 +11,16 @@ describe('for-in', () => {
         };
 
         forIn(testObject, (value, key, object) => {
-            expect(key).to.equal('abc');
-            expect(object).to.equal(testObject);
-            expect(value).to.equal('xyz');
+            chai.expect(key).to.equal('abc');
+            chai.expect(object).to.equal(testObject);
+            chai.expect(value).to.equal('xyz');
             functionExecuted = true;
         });
 
-        expect(functionExecuted).to.be.true;
+        chai.expect(functionExecuted).to.be.true;
     });
 
-    it('should iterate the enumerable properties of an object prototype', () => {
+    mocha.it('should iterate the enumerable properties of an object prototype', () => {
         let functionExecuted = 0;
 
         const functionArguments = [],
@@ -56,7 +49,7 @@ describe('for-in', () => {
             functionExecuted += 1;
         });
 
-        expect(functionArguments).to.deep.equal([{
+        chai.expect(functionArguments).to.deep.equal([{
             key: 'abc',
             object: testObject0,
             value: 'xyz'
@@ -82,6 +75,6 @@ describe('for-in', () => {
             value: 'ijk'
         }]);
 
-        expect(functionExecuted).to.equal(6);
+        chai.expect(functionExecuted).to.equal(6);
     });
 });
