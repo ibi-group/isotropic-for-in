@@ -1,26 +1,26 @@
-import chai from 'chai';
-import forIn from '../js/for-in.js';
-import mocha from 'mocha';
+import _chai from 'chai';
+import _forIn from '../js/for-in.js';
+import _mocha from 'mocha';
 
-mocha.describe('for-in', () => {
-    mocha.it('should iterate the enumerable properties of an object', () => {
+_mocha.describe('for-in', () => {
+    _mocha.it('should iterate the enumerable properties of an object', () => {
         let functionExecuted;
 
         const testObject = {
             abc: 'xyz'
         };
 
-        forIn(testObject, (value, key, object) => {
-            chai.expect(key).to.equal('abc');
-            chai.expect(object).to.equal(testObject);
-            chai.expect(value).to.equal('xyz');
+        _forIn(testObject, (value, key, object) => {
+            _chai.expect(key).to.equal('abc');
+            _chai.expect(object).to.equal(testObject);
+            _chai.expect(value).to.equal('xyz');
             functionExecuted = true;
         });
 
-        chai.expect(functionExecuted).to.be.true;
+        _chai.expect(functionExecuted).to.be.true;
     });
 
-    mocha.it('should iterate the enumerable properties of an object prototype', () => {
+    _mocha.it('should iterate the enumerable properties of an object prototype', () => {
         let functionExecuted = 0;
 
         const functionArguments = [],
@@ -40,7 +40,7 @@ mocha.describe('for-in', () => {
         Reflect.setPrototypeOf(testObject0, testObject1);
         Reflect.setPrototypeOf(testObject1, testObject2);
 
-        forIn(testObject0, (value, key, object) => {
+        _forIn(testObject0, (value, key, object) => {
             functionArguments.push({
                 key,
                 object,
@@ -49,7 +49,7 @@ mocha.describe('for-in', () => {
             functionExecuted += 1;
         });
 
-        chai.expect(functionArguments).to.deep.equal([{
+        _chai.expect(functionArguments).to.deep.equal([{
             key: 'abc',
             object: testObject0,
             value: 'xyz'
@@ -75,6 +75,6 @@ mocha.describe('for-in', () => {
             value: 'ijk'
         }]);
 
-        chai.expect(functionExecuted).to.equal(6);
+        _chai.expect(functionExecuted).to.equal(6);
     });
 });
