@@ -3,6 +3,7 @@
     "bugs": "https://github.com/ibi-group/isotropic-for-in/issues",
     "description": "A function to iterate an object's enumerable own and inherited properties",
     "devDependencies": {
+        "eslint": "~9.8.0",
         "isotropic-dev-dependencies": "~0.3.0"
     },
     "engines": {
