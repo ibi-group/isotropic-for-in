@@ -1,9 +1,9 @@
 import _chai from 'isotropic-dev-dependencies/lib/chai.js';
-import _forIn from '../js/for-in.js';
-import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
+import _forIn from '../lib/for-in.js';
+import _test from 'node:test';
 
-_mocha.describe('for-in', () => {
-    _mocha.it('should iterate the enumerable properties of an object', () => {
+_test.describe('for-in', () => {
+    _test.it('should iterate the enumerable properties of an object', () => {
         let functionExecuted;
 
         const testObject = {
@@ -20,7 +20,7 @@ _mocha.describe('for-in', () => {
         _chai.expect(functionExecuted).to.be.true;
     });
 
-    _mocha.it('should iterate the enumerable properties of an object prototype', () => {
+    _test.it('should iterate the enumerable properties of an object prototype', () => {
         let functionExecuted = 0;
 
         const functionArguments = [],
@@ -31,14 +31,13 @@ _mocha.describe('for-in', () => {
             testObject1 = {
                 ghi: 'rst',
                 jkl: 'opq'
-            },
-            testObject2 = {
-                mno: 'lmn',
-                pqr: 'ijk'
             };
 
         Reflect.setPrototypeOf(testObject0, testObject1);
-        Reflect.setPrototypeOf(testObject1, testObject2);
+        Reflect.setPrototypeOf(testObject1, {
+            mno: 'lmn',
+            pqr: 'ijk'
+        });
 
         _forIn(testObject0, (value, key, object) => {
             functionArguments.push({
@@ -76,5 +75,52 @@ _mocha.describe('for-in', () => {
         }]);
 
         _chai.expect(functionExecuted).to.equal(6);
+    });
+
+    _test.it('should skip non-enumerable properties', () => {
+        const keys = [],
+            testObject = {
+                visible: 'yes'
+            };
+
+        Reflect.defineProperty(testObject, 'hidden', {
+            enumerable: false,
+            value: 'no'
+        });
+
+        _forIn(testObject, (value, key) => {
+            keys.push(key);
+        });
+
+        _chai.expect(keys).to.deep.equal([
+            'visible'
+        ]);
+    });
+
+    _test.it('should not iterate symbol-keyed properties', () => {
+        const keys = [],
+            testObject = {
+                stringKey: 'yes'
+            };
+
+        testObject[Symbol('symbolKey')] = 'no';
+
+        _forIn(testObject, (value, key) => {
+            keys.push(key);
+        });
+
+        _chai.expect(keys).to.deep.equal([
+            'stringKey'
+        ]);
+    });
+
+    _test.it('should not call the iteration function for an object with no enumerable properties', () => {
+        let callCount = 0;
+
+        _forIn(Object.create(null), () => {
+            callCount += 1;
+        });
+
+        _chai.expect(callCount).to.equal(0);
     });
 });

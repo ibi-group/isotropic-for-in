@@ -95,7 +95,7 @@ import _forIn from 'isotropic-for-in';
         occupation: 'Developer'
     };
 
-    forIn(person, (value, key) => {
+    _forIn(person, (value, key) => {
         console.log(`${key}: ${value}`);
     });
     // Output:
@@ -110,7 +110,7 @@ import _forIn from 'isotropic-for-in';
 ```javascript
 import _forIn from 'isotropic-for-in';
 
-const _getAllValues object => {
+const _getAllValues = object => {
         // Collect all enumerable property values into an array
         const values = [];
 
@@ -140,7 +140,7 @@ const _getAllValues object => {
 {
     // Usage example
     const settings = {
-        fontSize: 16
+        fontSize: 16,
         theme: 'dark'
     };
 
