@@ -1,4 +1,13 @@
-# Changelog
+# isotropic-for-in Changelog
+
+## 0.14.1 - 2026-08-23
+
+### Changed
+
+- Recommends `node ^26.7.0` / `npm ^11.19.0`.
+- `repository` now uses npm's preferred object form with explicit `type` and `url` properties rather than the `github:` shorthand. This is package metadata only.
+
+No runtime behavior changed in this release.
 
 ## 0.14.0 - 2026-07-15
 
@@ -21,13 +30,14 @@ Nothing to change beyond running on Node 26. The iteration behavior of this pack
 
 - Test suite migrated from Mocha to the built-in `node --test` runner; assertions still use Chai.
 - The Babel toolchain (`@babel/cli`, `@babel/core`, `@babel/preset-env`, `babel-preset-minify`, `babel-plugin-transform-line`) and the `build` / `prepare` build scripts were removed.
-- `isotropic-dev-dependencies` updated to `~0.4.0`; the separately pinned `eslint` dev dependency was dropped, since the correct version now comes from `isotropic-dev-dependencies`.
+- `isotropic-dev-dependencies` updated to `~0.4.0`.
+- The separately pinned `eslint` dev dependency was dropped, since the correct version now comes from `isotropic-dev-dependencies`.
 
 ## 0.13.1 - 2025-04-10
 
 ### Changed
 
-- A comprehensive README was added, documenting the full public interface with worked examples.
+- A comprehensive README was added, documenting the full public interface with examples.
 - `eslint` pinned at `~9.8.0` as a direct dev dependency to guarantee the intended version is installed.
 - `isotropic-dev-dependencies` bumped to `~0.3.1`.
 
@@ -53,7 +63,7 @@ import _forIn from 'isotropic-for-in';
 
 ### Changed
 
-- ESLint moved to flat config (`eslint.config.js`); the `eslintConfig` block was removed from `package.json`.
+- ESLint moved to flat config (`eslint.config.js`) so the `eslintConfig` block was removed from `package.json`.
 - Coverage tooling switched from `nyc` to `c8`.
 - `repository` given an explicit `github:` prefix.
 - Recommends `node ^22.5.1` / `npm ^10.8.2`.
@@ -64,7 +74,9 @@ No runtime behavior changed in this release.
 
 ### Changed
 
-- The entire dev toolchain was replaced by a single `isotropic-dev-dependencies` dev dependency. The Babel, ESLint, and nyc configuration blocks were removed from `package.json` in favor of shared configuration, and git hooks are now installed via Husky on `postinstall`.
+- The entire dev toolchain was replaced by a single `isotropic-dev-dependencies` dev dependency.
+- The Babel, ESLint, and nyc configuration blocks were removed from `package.json` in favor of shared configuration.
+- Git hooks are now installed via Husky on `postinstall`.
 - Recommends `node ^14.15.5` / `npm ^7.5.4`
 
 No runtime behavior changed in this release.
@@ -73,7 +85,8 @@ No runtime behavior changed in this release.
 
 ### Changed
 
-- A `files` allowlist was added so only `lib` is published. Previously the tarball was filtered by `.npmignore`, which was removed.
+- A `files` allowlist was added so only `lib` is published.
+- `.npmignore` was removed.
 - Dependency refresh: ESLint 7, Mocha 8, nyc 15, Babel 7.10, `cross-env` 7.
 - Lint target raised to ECMAScript 2020.
 - Recommends `node ^12.18.3` / `npm ^6.14.6`.
@@ -187,5 +200,5 @@ No runtime behavior changed in this release.
 Initial release.
 
 - Default export is a function `(object, iterationFunction)` that walks every enumerable property of `object`, own and inherited, calling `iterationFunction(value, propertyName, object)` for each.
-- Unlike `Object.keys` or `Object.entries`, inherited enumerable properties are included; unlike a bare `for...in` loop, no `hasOwnProperty` guard is applied, which is the intended behavior.
-- Requires `babel-runtime` at runtime. No `engines` constraint declared.
+- Unlike `Object.keys` or `Object.entries`, inherited enumerable properties are included. Unlike a bare `for...in` loop, no `hasOwnProperty` guard is applied, which is the intended behavior.
+- Requires `babel-runtime` at runtime.
